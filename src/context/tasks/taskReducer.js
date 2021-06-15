@@ -6,7 +6,7 @@ import {
   DELETE_TASK_SUCCESS,
   DELETE_TASK_ERROR,
   READY_TASK,
-  NOT_READY_TASK,
+  CLEAN_ERROR,
 } from '../../types/index';
 
 const taskReducer = (state, action) => {
@@ -15,14 +15,23 @@ const taskReducer = (state, action) => {
       return {
         ...state,
       };
+
     case ADD_TASK_SUCCESS:
       return {
         ...state,
-        tasks: [...state.tasks, action.payload],
+        tasks: action.payload,
       };
+
     case ADD_TASK_ERROR:
       return {
         ...state,
+        errors: action.payload,
+      };
+
+    case CLEAN_ERROR:
+      return {
+        ...state,
+        errors: null,
       };
 
     case DELETE_TASK:
@@ -33,10 +42,14 @@ const taskReducer = (state, action) => {
     case DELETE_TASK_SUCCESS:
       return {
         ...state,
-        tasks: state.tasks.filter((task) => task.id !== action.payload),
       };
 
     case DELETE_TASK_ERROR:
+      return {
+        ...state,
+      };
+
+    case READY_TASK:
       return {
         ...state,
       };

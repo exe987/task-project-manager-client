@@ -34,13 +34,17 @@ const FormTask = () => {
       }, 2000);
       return;
     }
+    
     data.id_project = id;
-    console.log(data);
     addTaskContext(data);
+    setData({
+      name: '',
+      description: '',
+    });
   };
 
   return (
-    <form className='p-5 bg-secondary mt-3' onSubmit={submitData}>
+    <form className='p-4 bg-dark mt-3' onSubmit={submitData}>
       <p className='h4 text-white'>ADD A TASK</p>
       <div className='form-group'>
         <input
@@ -54,7 +58,7 @@ const FormTask = () => {
       </div>
       <div className='form-group'>
         <textarea
-        onChange={handleChange}
+          onChange={handleChange}
           className='form-control'
           name='description'
           value={description}
@@ -70,6 +74,10 @@ const FormTask = () => {
       <button type='submit' className='btn btn-warning'>
         +
       </button>
+      <br />
+      <a href='/' className='text-white'>
+        Go to projects
+      </a>
     </form>
   );
 };
